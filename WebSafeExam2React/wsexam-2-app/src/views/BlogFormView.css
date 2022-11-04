@@ -1,0 +1,18 @@
+.blog-form {
+    display: grid;
+    place-items: center;
+    padding-top: 10%;
+}
+
+.input-group {
+    margin: 0.5rem;
+    padding: 0.5rem
+}
+.input-group label, input-group input {
+    display: block;
+}
+
+.submit-btn {
+    padding: 0.2em 2em;
+    font-size: 1.3rem;
+}
