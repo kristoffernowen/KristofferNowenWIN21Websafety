@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebSafetyExam2;
 using WebSafetyExam2.Entities;
 
 namespace WebSafetyExam2.Controllers
@@ -25,7 +20,10 @@ namespace WebSafetyExam2.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BlogEntity>>> GetBlog()
         {
-            return await _context.Blog.Select(blog => blog.EncodeEntity().DecodeAllowedTags()).ToListAsync();
+            var returnThis = await _context.Blog.Select(blog => blog.EncodeEntity().DecodeAllowedTags()).ToListAsync();
+            //var returnThis = await _context.Blog.ToListAsync();
+
+            return returnThis;
         }
 
         // GET: api/BlogEntities/5
@@ -78,7 +76,7 @@ namespace WebSafetyExam2.Controllers
         [HttpPost]
         public async Task<ActionResult<BlogEntity>> PostBlogEntity(BlogEntity blogEntity)
         {
-            _context.Blog.Add(blogEntity.EncodeEntity());
+            _context.Blog.Add(blogEntity.EncodeEntity());   // removed encode to get pass & becoming amp; Reinserted encode and then added encodedAllowedTags in BlogEntityExtension
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetBlogEntity", new { id = blogEntity.Id }, blogEntity);

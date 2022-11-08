@@ -30,6 +30,18 @@ public static class BlogEntityExtension
             encodedBlogEntity.UserId = encodedBlogEntity.UserId.Replace(encodedTag, tag);
         }
 
+        var encodedAllowedTags = new[] { "&lt;i&gt;", "&lt;/i&gt;", "&lt;b&gt;", "&lt;/b&gt;" };
+
+        foreach (var tag in encodedAllowedTags)
+        {
+            var twiceEncodedTag = HttpUtility.HtmlEncode(tag);
+            var decodedTag = HttpUtility.HtmlDecode(tag);
+
+            encodedBlogEntity.Title = encodedBlogEntity.Title.Replace(twiceEncodedTag, decodedTag);
+            encodedBlogEntity.Message = encodedBlogEntity.Message.Replace(twiceEncodedTag, decodedTag);
+            encodedBlogEntity.UserId = encodedBlogEntity.UserId.Replace(twiceEncodedTag, decodedTag);
+        }
+
         return encodedBlogEntity;
     }
 }

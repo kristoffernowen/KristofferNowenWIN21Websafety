@@ -1,0 +1,10 @@
+.blog-card {
+    height: auto;
+    width: 300px;
+    background-color: rgba(183, 173, 206, 0.8);
+}
+
+.blog-item {
+    padding: 1rem;
+    overflow-wrap: anywhere;
+}

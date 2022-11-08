@@ -5,12 +5,13 @@ import BlogPostsView from "./views/BlogPostsView";
 import Navbar from "./components/Navbar";
 
 function App() {
+
   return (
     <>
         <Navbar />
         <Routes>
             <Route path="/BlogFormView" element={<BlogFormView />} />
-            <Route path="/BlogPostsView" element={<BlogPostsView />} />
+            <Route path="/" element={<BlogPostsView />} />
         </Routes>
     </>
   );

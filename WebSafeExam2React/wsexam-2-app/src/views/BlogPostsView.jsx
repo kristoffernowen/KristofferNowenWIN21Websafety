@@ -1,4 +1,6 @@
 import {useEffect, useState} from "react";
+import BlogPosts from "../components/BlogPosts";
+import './BlogPostsView.css'
 
 
 const BlogPostsView = () => {
@@ -14,12 +16,10 @@ const BlogPostsView = () => {
         fetchData();
     }, [])
 
-    console.log(blogPosts)
-
     return (
         <div>
-            <p>Blog posts view</p>
-
+            <h1>Blog posts view</h1>
+            <BlogPosts blogPosts={blogPosts} />
         </div>
     )
 }
