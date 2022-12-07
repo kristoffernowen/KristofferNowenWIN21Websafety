@@ -263,4 +263,8 @@ C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\bin\Debug\net6.0\runtimes\win\lib\n
 C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\bin\Debug\net6.0\Donlim.Development.Extension.dll
-C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\obj\Debug\net6.0\staticwebassets\msbuild.WebSafetyExam2.Microsoft.AspNetCore.StaticWebAssets.props
+C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\obj\Debug\net6.0\staticwebassets\msbuild.build.WebSafetyExam2.props
+C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.WebSafetyExam2.props
+C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.WebSafetyExam2.props
+C:\WebSafeExam\WebSafetyExam2\WebSafetyExam2\obj\Debug\net6.0\staticwebassets.pack.json

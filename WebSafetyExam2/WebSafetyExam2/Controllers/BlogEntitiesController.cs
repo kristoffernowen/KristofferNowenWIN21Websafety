@@ -1,10 +1,12 @@
 ﻿
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebSafetyExam2.Entities;
 
 namespace WebSafetyExam2.Controllers
 {
+    [EnableCors("react")]
     [Route("api/[controller]")]
     [ApiController]
     public class BlogEntitiesController : ControllerBase

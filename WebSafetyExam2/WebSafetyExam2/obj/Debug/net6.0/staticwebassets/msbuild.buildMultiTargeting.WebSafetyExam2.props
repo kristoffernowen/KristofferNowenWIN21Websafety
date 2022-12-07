@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\WebSafetyExam2.props" />
+</Project>

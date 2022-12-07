@@ -19,6 +19,9 @@ public static class BlogEntityExtension
 
     public static BlogEntity DecodeAllowedTags(this BlogEntity encodedBlogEntity)
     {
+        // Jag provade att encoda på vägen in också, då blev jag tvungen att decoda dubbelt på vägen ut. Antagligen onödigt när jag har DOMPurify
+        // i react inputen, men jag tror det får vara med den här gången.
+
         var allowedTags = new[] { "<b>", "</b>", "<i>", "</i>" };
 
         foreach (var tag in allowedTags)
