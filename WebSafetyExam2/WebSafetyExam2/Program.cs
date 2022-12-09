@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
 
 // Något i Microsoft.AspNetCore.Authentication.JwtBearer krockar med Swagger. Jag fick ta bort Swagger interface för att

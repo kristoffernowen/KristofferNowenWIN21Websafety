@@ -18,7 +18,7 @@ const BlogPostsView = () => {
 
     return (
         <div>
-            <h1>Blog posts view</h1>
+            <h1>Blog posts</h1>
             <BlogPosts blogPosts={blogPosts} />
         </div>
     )

@@ -2,17 +2,65 @@
     display: grid;
     place-items: center;
     padding-top: 10%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 9px;
+    padding: 1rem;
+    border: 2px solid rgb(231, 224, 238);
+    color: blueviolet;
 }
 
 .input-group {
     margin: 0.5rem;
     padding: 0.5rem
 }
-.input-group label, input-group input {
+.input-group label, .input-group input {
     display: block;
+    border-radius: 5px;
+    width: 500px;
+}
+
+input {
+    border: 2px solid rgb(231, 224, 238);
+}
+
+.submit-btn {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: blueviolet;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin:2rem;
+    padding: 1rem;
+    border: none;
+}
+
+.submit-btn:hover{
+    background-color: blueviolet;
+    color:  rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+}
+
+.submit-btn:active{
+    background-color: rgb(238, 234, 242);
 }
 
 .submit-btn {
     padding: 0.2em 2em;
     font-size: 1.3rem;
+}
+
+.outside-border-div {
+    background-color: rgb(252, 249, 253);
+    width: 70%;
+    height: 10%;
+    margin: 2rem auto;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+.inside-border-div {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 9px;
+    padding: 1rem;
+    border: 2px solid rgb(231, 224, 238);
 }

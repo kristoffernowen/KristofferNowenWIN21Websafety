@@ -1,7 +1,115 @@
+.container {
+    background-color: rgb(231, 224, 238);
+    width: 80%;
+    margin: auto;
+}
+
+.container-middle {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgb(231, 224, 238);
+    margin: 1rem;
+    border-radius: 15px;
+}
+
+.container-div {
+    margin: 1rem;
+    border: 2px solid rgb(231, 224, 238);
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+}
+
+h2 {
+    text-align: center;
+    color: blueviolet;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     height:3rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5rem;
+    color: blueviolet;
 }
+
+.navbar-side {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+}
+
+.navbar-log {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+}
+
+.navbar button {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: blueviolet;
+    cursor: pointer;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin:2rem;
+    padding: 1rem;
+}
+
+.navbar button:hover{
+    background-color: blueviolet;
+    color:  rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+}
+
+.navbar button:active{
+    background-color: rgb(238, 234, 242);
+}
+
+.navlink {
+    text-decoration: none;
+    color: blueviolet;
+    margin: 2rem;
+}
+
+.navlink.active {
+    background-color: rgb(238, 234, 242);
+    padding: 1rem;
+    border-radius: 15px;
+    margin: 0 -1rem;
+}
+
+.navlink:hover{
+    background-color: blueviolet;
+    color:  rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 15px;
+    margin: 0 -1rem;
+   /*  transition: 10ms;
+    transition-timing-function: ease-in-out; */
+}
+
+.navbar p {
+    text-decoration: none;
+    color: blueviolet;
+    margin: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
