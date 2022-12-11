@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +9,7 @@ namespace WebSafetyExam2.Controllers
     [EnableCors("react")]
     [Route("api/[controller]")]
     [ApiController]
+    
     public class BlogEntitiesController : ControllerBase
     {
         private readonly SqlContext _context;
@@ -20,12 +21,10 @@ namespace WebSafetyExam2.Controllers
 
         // GET: api/BlogEntities
         [HttpGet]
+        
         public async Task<ActionResult<IEnumerable<BlogEntity>>> GetBlog()
         {
-            var returnThis = await _context.Blog.Select(blog => blog.EncodeEntity().DecodeAllowedTags()).ToListAsync();
-            //var returnThis = await _context.Blog.ToListAsync();
-
-            return returnThis;
+            return await _context.Blog.Select(blog => blog.EncodeEntity().DecodeAllowedTags()).ToListAsync();
         }
 
         // GET: api/BlogEntities/5
@@ -73,12 +72,14 @@ namespace WebSafetyExam2.Controllers
             return NoContent();
         }
 
-        // POST: api/BlogEntities
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
         [HttpPost]
+        [Authorize("create:blogEntity")]
+
         public async Task<ActionResult<BlogEntity>> PostBlogEntity(BlogEntity blogEntity)
         {
-            _context.Blog.Add(blogEntity.EncodeEntity());   // removed encode to get pass & becoming amp; Reinserted encode and then added encodedAllowedTags in BlogEntityExtension
+            _context.Blog.Add(blogEntity); // blogEntity.Encode() från början för att testa att encoda på vägen in. Då behövs andra foreach i Encode för
+                                           // att decoda dubbelencodade tecken
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetBlogEntity", new { id = blogEntity.Id }, blogEntity);

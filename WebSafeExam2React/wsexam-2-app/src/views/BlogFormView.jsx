@@ -1,22 +1,44 @@
 import React from "react";
 import "./BlogFormView.css"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DOMPurify from 'dompurify';
 import { useAuth0 } from "@auth0/auth0-react";
-
 
 const BlogFormView = () => {
 
     const [title, setTitle] = useState('');
     const [message, setMessage] = useState('');
-    const { user } = useAuth0();
-    const { isAuthenticated } = useAuth0();
+    const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+
+    useEffect(() => {
+        const getToken = async () => {
+            if (isAuthenticated) {
+                try {
+                    const token = await getAccessTokenSilently({
+                        audience: process.env.REACT_APP_AUTH0_AUDIENCE
+                    })
+
+                    localStorage.setItem('accessToken', token)
+                } catch {
+
+                }
+            } else {
+                localStorage.removeItem('accessToken')
+            }
+        }
+
+        getToken();
+
+    }, [getAccessTokenSilently, isAuthenticated])
+
+    const token = localStorage.getItem('accessToken')
 
     const postBlog = async blogPost => {
 
         isAuthenticated ? await fetch('https://localhost:7064/api/BlogEntities', {
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'authorization': `Bearer ${token}`
             },
             method: 'post',
             body: JSON.stringify(blogPost)
@@ -32,6 +54,7 @@ const BlogFormView = () => {
         }
         let data;
         postBlog(blogPost).then(r => data)
+        document.querySelector('#blogForm').reset();
     }
 
     return (
@@ -39,7 +62,7 @@ const BlogFormView = () => {
             {
                 isAuthenticated ?
                     <div className="outside-border-div">
-                        <form className="blog-form" onSubmit={handleSubmit}>
+                        <form id="blogForm" className="blog-form" onSubmit={handleSubmit}>
                             <div className="input-group">
                                 <label htmlFor="title">Blog title</label>
                                 <input name="title" type="text" id="title" onChange={(e) => setTitle(e.target.value)} />

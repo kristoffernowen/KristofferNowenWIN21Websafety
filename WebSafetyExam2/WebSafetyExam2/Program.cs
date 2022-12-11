@@ -1,9 +1,12 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using WebSafetyExam2;
+using WebSafetyExam2.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-// builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
-
-// Något i Microsoft.AspNetCore.Authentication.JwtBearer krockar med Swagger. Jag fick ta bort Swagger interface för att
-// jwtbearer ska funka
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SqlContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Sql")));
@@ -26,41 +26,49 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
-    options.Authority = "https://dev-bz6ufpqwlzmwscqe.us.auth0.com/";
-    options.Audience = "WebSafetyExam2";
+    options.Authority = builder.Configuration["Auth0:Domain"];
+    options.Audience = builder.Configuration["Auth0:Audience"];
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        NameClaimType = ClaimTypes.NameIdentifier
+    };
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(
+        "create:blogEntity",
+        policy=> policy.Requirements.Add(new HasScopeRequirement("create:blogEntity", builder.Configuration["Auth0:Domain"])));
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policyBuilder =>    // Why wont default work!!!!
-    {
-        policyBuilder.WithOrigins("http://localhost:3000/");
-        policyBuilder.WithMethods("GET", "POST"); // Tillåts i vilket fall dock...
-        policyBuilder.WithHeaders(HeaderNames.AcceptLanguage, "mandatory-header", HeaderNames.ContentType);
-    });
+    
     options.AddPolicy("react", policyBuilder =>
     {
         policyBuilder.WithOrigins("http://localhost:3000");
         policyBuilder.WithMethods("GET", "DELETE");         
-        policyBuilder.WithHeaders(HeaderNames.ContentType, "mandatory-header");  
+        policyBuilder.WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization);  
     });
 });
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-// if (app.Environment.IsDevelopment())
-// {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
-// }
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-// app.UseSwagger();
-// app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // app.UseRouting should be above cors
 app.UseCors();
-// app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
 
 app.UseHttpsRedirection();
 

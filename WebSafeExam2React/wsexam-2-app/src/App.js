@@ -10,7 +10,7 @@ function App() {
     <>
         <Navbar />
         <Routes>
-            <Route path="/BlogFormView" element={<BlogFormView />} />
+            <Route path="/BlogFormView" element={<BlogFormView/>} />
             <Route path="/" element={<BlogPostsView />} />
         </Routes>
     </>
